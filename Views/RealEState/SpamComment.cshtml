@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SmartRentalApp.Models.RealEstateComment>
+
+@{
+    ViewBag.Title = "Comment reported as SPAM";
+
+}
+
+@if (Model.Count() > 0)
+{
+    <table style="text-align: center">
+        <tbody>
+            <tr>
+                <th>Commenter</th>
+                <th>Comment</th>
+                <th>Date</th>
+                <th>Options</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Username
+                    </td>
+                    <td>
+                        @item.CommentContent
+                    </td>
+                    <td>
+                        @item.CommentDate.ToShortDateString()
+                    </td>
+                    <td>
+                        <a href="/RealEState/DeleteComment/@item.CommentID" title="Delete Comment" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="information-box">
+        There're no comments reported as SPAM
+    </p>
+}

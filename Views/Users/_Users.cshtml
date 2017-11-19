@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SmartRentalApp.Models.ApplicationUser>
+@{ var index = 0;}
+@foreach (var item in Model)
+{
+    index += 1;
+    <tr>
+        <td>@index</td>
+        <td>
+            @Html.DisplayFor(model => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.PhoneNumber)
+        </td>
+    </tr>
+}

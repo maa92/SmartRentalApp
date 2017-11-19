@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SmartRentalApp.Models.RealEStateImage>
+
+@{
+    ViewBag.Title = "Real Estate Image";
+}
+
+@if (TempData["Message"] != null)
+{
+    <p class="information-box">
+        @TempData["Message"]
+    </p>
+}
+
+
+@using (Html.BeginForm("UploadImage", "RealEstate", new { id = ViewBag.RealEstateID }, FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div>
+        <label style="font-weight: bold">Upload Image</label>
+        <input type="file" name="realEsateImage" style="width: 300px" required />
+    </div>
+    <fieldset id="contactForm">
+        <p>
+            <input type="submit" value="Upload" id="submit" class="link-button" />
+        </p>
+    </fieldset>
+}
+
+<ul id="portfolio-list" class="gallery three-cols">
+    @foreach (var img in Model)
+    {
+        var imageURL = string.Format("/RealEState/ShowImage/{0}", img.ImageID);
+        <li>
+            <center>
+                <a href="/RealEState/DeleteImage/@img.ImageID" class="link-button" style="text-align: center; width: 110px" title="Delete this image" onclick="return confirm('Are you sure you want to delete this image?');"><span>Delete Image</span></a>
+            </center>
+            <img width="400" height="265" src="@imageURL" alt="Pic">
+
+        </li>
+    }
+</ul>

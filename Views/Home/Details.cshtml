@@ -1,0 +1,286 @@
+﻿@model SmartRentalApp.Models.RealEState
+
+@{
+    ViewBag.Title = "Real Estate Details";
+}
+
+@if (Request.IsAuthenticated)
+{
+
+    if (Utilities.IsDistrictFavorite(Utilities.GetLoggedInUser.UserName, Model.DistrictID))
+    {
+        <p class="information-box">
+            You have subscribed to this district.
+        </p>
+    }
+    else
+    {
+        <p class="information-box">
+            If you like this district, you can <a href="/RealEState/AddFavorite/@Model.RealEStateID">add this district to your Subscriptions</a>
+        </p>
+    }
+}
+else
+{
+    <p class="warning-box">
+        You must be registered to read, subscribe and write comments! <a href="/Account/Register">REGISTER Now</a> or <a href="/Account/Login">LOGIN</a>
+    </p>
+}
+<div class="one-third">
+    <center>
+        <div id="googleMapArea" style="width: 280px; height: 200px; direction: rtl; border: 1px solid #808080">
+        </div>
+    </center>
+    <br />
+    <ul id="portfolio-list" class="gallery">
+        @foreach (var img in Model.RealEStateImages.Take(3))
+        {
+            var imageURL = string.Format("/RealEState/ShowImage/{0}", img.ImageID);
+            <li><img width="250" height="180" src="@imageURL" alt="Pic"></li>
+        }
+    </ul>
+
+</div>
+<div class="two-third last">
+    <table>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.Description)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.Area)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.Area)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.Address)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.Address)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.MinPrice)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.MinPrice)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.MaxPrice)
+            </td>
+
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.MaxPrice)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.CreatedOn)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.RealEStatePurpos.PurposeName)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.RealEStatePurpos.PurposeName)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.RealEstatesDistrict.DistrictName)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.RealEstatesDistrict.DistrictName)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.RealEStateType.TypeName)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.RealEStateType.TypeName)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                Agent Phone
+            </td>
+            <td class="formControlTd">
+                @if (Request.IsAuthenticated)
+                {
+                    <b>@ViewBag.AgentPhone</b>
+                }
+                else
+                {
+                    <p class="warning-box">
+                        You must be registered and logged in to view Agent's Phone.
+                    </p>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                Added at
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.CreatedOn)
+            </td>
+        </tr>
+        @if (Model.ResidentialRealEstate != null)
+        {
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.RoomsNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.RoomsNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.BathsNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.BathsNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.WithGarden)
+                </td>
+
+                <td class="formControlTd">
+                    @{string withGarden = Model.ResidentialRealEstate.WithGarden ? "Yes" : "No";}
+                    @Html.DisplayFor(model => withGarden)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.WithRoof)
+                </td>
+
+                <td class="formControlTd">
+                    @{string withRoof = Model.ResidentialRealEstate.WithRoof ? "Yes" : "No";}
+                    @Html.DisplayFor(model => withRoof)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.LevelNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.LevelNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.HouseNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.HouseNo)
+                </td>
+            </tr>
+        }
+    </table>
+    @if (Request.IsAuthenticated)
+    {
+        <div id="posts" class="single">
+            <div id="comments-block">
+                <div class="n-comments">@Model.RealEstateComments.Count()</div>
+                <div class="n-comments-text">comments</div>
+                <!-- comments list -->
+                <ul class="commentlist">
+                    @foreach (var comment in Model.RealEstateComments)
+                    {
+                        <li class="comment">
+                            <div class="comment-body">
+                                <div class="comment-author vcard">
+                                    <img alt="" src="~/img/dummies/avatar.jpg" class="avatar avatar-60 photo" height="60" width="60">
+                                    <cite class="fn">@comment.Username</cite><span class="says"> says:</span>
+                                </div>
+
+                                <div class="comment-meta commentmetadata">
+                                    <a href="#">@comment.CommentDate.ToShortDateString()</a>
+                                </div>
+                                <p>
+                                    @comment.CommentContent
+                                </p>
+
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <!-- ENDS comments list -->
+                <!-- comments form -->
+                <div id="respond">
+                    <div class="leave-comment">
+                        <!-- form -->
+                        @using (Html.BeginForm("WriteComment", "RealEState", FormMethod.Post))
+                        {
+                            <fieldset>
+                                <div class="admin-form">
+                                    <div>
+                                        <label>Your Comment</label>
+                                        <textarea name="comment" id="comment" rows="10" tabindex="4" maxlength="1000"></textarea>
+                                    </div>
+                                    <div><input type="submit" name="submit" id="submit" tabindex="5" value="SEND"></div>
+                                </div>
+                                <input type="hidden" name="RealEstateID" value="@Model.RealEStateID" id="comment_post_ID">
+                            </fieldset>
+                        }
+
+                        <!-- ENDS form -->
+                    </div>
+                </div>
+                <!-- ENDS comments form -->
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="warning-box">You must be registered to read, subscribe and write comments! <a href="/Account/Register">REGISTER Now</a> or <a href="/Account/Login">LOGIN</a></p>
+    }
+</div>
+
+<script type="text/javascript">
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var zoomLevel;
+        var myLatlng;
+
+        myLatlng = new google.maps.LatLng(@(Model.Latitude), @(Model.Longitude));
+        zoomLevel = 12;
+
+        var myOptions = {
+            scrollwheel: false,
+            zoom: zoomLevel,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("googleMapArea"), myOptions);
+
+        marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable: false
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

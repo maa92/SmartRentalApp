@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SmartRentalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomersFavorites">
+    <Key>
+      <PropertyRef Name="FavoriteID" />
+    </Key>
+    <Property Name="FavoriteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="DistrictID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEstateComments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CommentContent" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="CommentDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="RealEstateID" Type="bigint" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="IsSpam" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEStateImages">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ImageData" Type="image" Nullable="false" />
+    <Property Name="ImageDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="RealEStateID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEStatePurposes">
+    <Key>
+      <PropertyRef Name="PurposeID" />
+    </Key>
+    <Property Name="PurposeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PurposeName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEStates">
+    <Key>
+      <PropertyRef Name="RealEStateID" />
+    </Key>
+    <Property Name="RealEStateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeID" Type="tinyint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Area" Type="float" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="PurposeID" Type="tinyint" Nullable="false" />
+    <Property Name="MinPrice" Type="money" Nullable="false" />
+    <Property Name="MaxPrice" Type="money" Nullable="false" />
+    <Property Name="DistrictID" Type="int" Nullable="false" />
+    <Property Name="Latitude" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Longitude" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RealEstateStatus" Type="bit" />
+  </EntityType>
+  <EntityType Name="RealEStatesCities">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEstatesDistricts">
+    <Key>
+      <PropertyRef Name="DistrictID" />
+    </Key>
+    <Property Name="DistrictID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DistrictName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityID" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEStateTypes">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ResidentialRealEstates">
+    <Key>
+      <PropertyRef Name="RealEstateID" />
+    </Key>
+    <Property Name="RealEstateID" Type="bigint" Nullable="false" />
+    <Property Name="RoomsNo" Type="int" Nullable="false" />
+    <Property Name="BathsNo" Type="int" Nullable="false" />
+    <Property Name="WithGarden" Type="bit" Nullable="false" />
+    <Property Name="WithRoof" Type="bit" Nullable="false" />
+    <Property Name="LevelNo" Type="int" />
+    <Property Name="HouseNo" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_CustomersFavorites_RealEstatesDistricts">
+    <End Role="RealEstatesDistricts" Type="Self.RealEstatesDistricts" Multiplicity="1" />
+    <End Role="CustomersFavorites" Type="Self.CustomersFavorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstatesDistricts">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="CustomersFavorites">
+        <PropertyRef Name="DistrictID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RealEstateComments_RealEStates">
+    <End Role="RealEStates" Type="Self.RealEStates" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RealEstateComments" Type="Self.RealEstateComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEStates">
+        <PropertyRef Name="RealEStateID" />
+      </Principal>
+      <Dependent Role="RealEstateComments">
+        <PropertyRef Name="RealEstateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RealEStateImages_RealEStates">
+    <End Role="RealEStates" Type="Self.RealEStates" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RealEStateImages" Type="Self.RealEStateImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEStates">
+        <PropertyRef Name="RealEStateID" />
+      </Principal>
+      <Dependent Role="RealEStateImages">
+        <PropertyRef Name="RealEStateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RealEStates_RealEStatePurposes">
+    <End Role="RealEStatePurposes" Type="Self.RealEStatePurposes" Multiplicity="1" />
+    <End Role="RealEStates" Type="Self.RealEStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEStatePurposes">
+        <PropertyRef Name="PurposeID" />
+      </Principal>
+      <Dependent Role="RealEStates">
+        <PropertyRef Name="PurposeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RealEStates_RealEstatesDistricts">
+    <End Role="RealEstatesDistricts" Type="Self.RealEstatesDistricts" Multiplicity="1" />
+    <End Role="RealEStates" Type="Self.RealEStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstatesDistricts">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="RealEStates">
+        <PropertyRef Name="DistrictID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RealEStates_RealEStateTypes">
+    <End Role="RealEStateTypes" Type="Self.RealEStateTypes" Multiplicity="1" />
+    <End Role="RealEStates" Type="Self.RealEStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEStateTypes">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="RealEStates">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RealEstatesDistricts_RealEStatesCities">
+    <End Role="RealEStatesCities" Type="Self.RealEStatesCities" Multiplicity="1" />
+    <End Role="RealEstatesDistricts" Type="Self.RealEstatesDistricts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEStatesCities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="RealEstatesDistricts">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResidentialRealEstates_RealEStates">
+    <End Role="RealEStates" Type="Self.RealEStates" Multiplicity="1" />
+    <End Role="ResidentialRealEstates" Type="Self.ResidentialRealEstates" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="RealEStates">
+        <PropertyRef Name="RealEStateID" />
+      </Principal>
+      <Dependent Role="ResidentialRealEstates">
+        <PropertyRef Name="RealEstateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SmartRentalDBModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomersFavorites" EntityType="Self.CustomersFavorites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEstateComments" EntityType="Self.RealEstateComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEStateImages" EntityType="Self.RealEStateImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEStatePurposes" EntityType="Self.RealEStatePurposes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEStates" EntityType="Self.RealEStates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEStatesCities" EntityType="Self.RealEStatesCities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEstatesDistricts" EntityType="Self.RealEstatesDistricts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RealEStateTypes" EntityType="Self.RealEStateTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResidentialRealEstates" EntityType="Self.ResidentialRealEstates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CustomersFavorites_RealEstatesDistricts" Association="Self.FK_CustomersFavorites_RealEstatesDistricts">
+      <End Role="RealEstatesDistricts" EntitySet="RealEstatesDistricts" />
+      <End Role="CustomersFavorites" EntitySet="CustomersFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RealEstateComments_RealEStates" Association="Self.FK_RealEstateComments_RealEStates">
+      <End Role="RealEStates" EntitySet="RealEStates" />
+      <End Role="RealEstateComments" EntitySet="RealEstateComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RealEStateImages_RealEStates" Association="Self.FK_RealEStateImages_RealEStates">
+      <End Role="RealEStates" EntitySet="RealEStates" />
+      <End Role="RealEStateImages" EntitySet="RealEStateImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RealEStates_RealEStatePurposes" Association="Self.FK_RealEStates_RealEStatePurposes">
+      <End Role="RealEStatePurposes" EntitySet="RealEStatePurposes" />
+      <End Role="RealEStates" EntitySet="RealEStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RealEStates_RealEstatesDistricts" Association="Self.FK_RealEStates_RealEstatesDistricts">
+      <End Role="RealEstatesDistricts" EntitySet="RealEstatesDistricts" />
+      <End Role="RealEStates" EntitySet="RealEStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RealEStates_RealEStateTypes" Association="Self.FK_RealEStates_RealEStateTypes">
+      <End Role="RealEStateTypes" EntitySet="RealEStateTypes" />
+      <End Role="RealEStates" EntitySet="RealEStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RealEstatesDistricts_RealEStatesCities" Association="Self.FK_RealEstatesDistricts_RealEStatesCities">
+      <End Role="RealEStatesCities" EntitySet="RealEStatesCities" />
+      <End Role="RealEstatesDistricts" EntitySet="RealEstatesDistricts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResidentialRealEstates_RealEStates" Association="Self.FK_ResidentialRealEstates_RealEStates">
+      <End Role="RealEStates" EntitySet="RealEStates" />
+      <End Role="ResidentialRealEstates" EntitySet="ResidentialRealEstates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

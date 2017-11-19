@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="539e6cfb6bff44728713ba04f79fd767" Name="Diagram1">
+        <EntityTypeShape EntityType="SmartRentalDBModel.CustomersFavorite" Width="2" PointX="5.125" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEstateComment" Width="2.125" PointX="2.375" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEStateImage" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEStatePurpos" Width="2.375" PointX="7.625" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEState" Width="2.25" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEStatesCity" Width="1.5" PointX="0.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEstatesDistrict" Width="1.875" PointX="2.625" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.RealEStateType" Width="2.125" PointX="7.625" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.ResidentialRealEstate" Width="2.125" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_CustomersFavorites_RealEstatesDistricts" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_RealEstateComments_RealEStates" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_RealEStateImages_RealEStates" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_RealEStates_RealEStatePurposes" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_RealEStates_RealEstatesDistricts" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_RealEStates_RealEStateTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_ResidentialRealEstates_RealEStates" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_RealEstatesDistricts_RealEStatesCities" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.AspNetRole" Width="1.5" PointX="0.75" PointY="14.5" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="13" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="15.75" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.AspNetUser" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="SmartRentalDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="9.75" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SmartRentalDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SmartRentalDBModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

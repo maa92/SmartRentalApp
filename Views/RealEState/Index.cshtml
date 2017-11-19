@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SmartRentalApp.Models.RealEState>
+
+@{
+    ViewBag.Title = "Real Estates List";
+}
+
+<p>
+    <a href="/RealEState/Create" class="link-button"><span>Add New Real Estate</span></a>
+</p>
+
+@if (Model.Count() > 0)
+{
+    <table style="text-align: center">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RealEStateType.TypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Area)
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RealEStatePurpos.PurposeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RealEstatesDistrict.DistrictName)
+                </th>
+                <th>Options</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealEStateType.TypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MinPrice) - @Html.DisplayFor(modelItem => item.MaxPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealEStatePurpos.PurposeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealEstatesDistrict.DistrictName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Images", "ListImages", new { id = item.RealEStateID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.RealEStateID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.RealEStateID }) |
+                        @if (item.RealEstateStatus.Value)
+                        {
+                            <a href="/RealEState/UpdateStatus/@item.RealEStateID" title="Close it" onclick="return confirm('Are you sure you want to close this Real Estate?')">Close</a>
+                        }
+                        else
+                        {
+                            <a href="/RealEState/UpdateStatus/@item.RealEStateID" title="Open it" onclick="return confirm('Are you sure you want to open this Real Estate?')">Open</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="information-box">
+        You didn't add any Real Estates yet.
+    </p>
+}

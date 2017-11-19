@@ -1,0 +1,153 @@
+﻿@model SmartRentalApp.Models.RealEState
+
+@{
+    ViewBag.Title = "Delete Real Estate";
+}
+
+
+<div>
+
+    <table>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.Description)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.Area)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.Area)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.Address)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.Address)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.MinPrice)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.MinPrice)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.MaxPrice)
+            </td>
+
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.MaxPrice)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.CreatedOn)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.RealEStatePurpos.PurposeName)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.RealEStatePurpos.PurposeName)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.RealEstatesDistrict.DistrictName)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.RealEstatesDistrict.DistrictName)
+            </td>
+        </tr>
+        <tr>
+            <td class="formLabelTd">
+                @Html.DisplayNameFor(model => model.RealEStateType.TypeName)
+            </td>
+            <td class="formControlTd">
+                @Html.DisplayFor(model => model.RealEStateType.TypeName)
+            </td>
+        </tr>
+        @if (Model.ResidentialRealEstate != null)
+        {
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.RoomsNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.RoomsNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.BathsNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.BathsNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.WithGarden)
+                </td>
+
+                <td class="formControlTd">
+                    @{string withGarden = Model.ResidentialRealEstate.WithGarden ? "Yes" : "No";}
+                    @Html.DisplayFor(model => withGarden)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.WithRoof)
+                </td>
+
+                <td class="formControlTd">
+                    @{string withRoof = Model.ResidentialRealEstate.WithRoof ? "Yes" : "No";}
+                    @Html.DisplayFor(model => withRoof)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.LevelNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.LevelNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="formLabelTd">
+                    @Html.DisplayNameFor(model => model.ResidentialRealEstate.HouseNo)
+                </td>
+                <td class="formControlTd">
+                    @Html.DisplayFor(model => model.ResidentialRealEstate.HouseNo)
+                </td>
+            </tr>
+        }
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        <fieldset id="contactForm">
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" id="submit" /> |
+                @Html.ActionLink("Back to List", "Index", null, new { id = "submitBig" })
+            </div>
+        </fieldset>
+    }
+</div>

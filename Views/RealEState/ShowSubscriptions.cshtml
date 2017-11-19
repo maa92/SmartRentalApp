@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SmartRentalApp.Models.CustomersFavorite>
+
+@{
+    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+    ViewBag.ShowSlider = false;
+}
+
+@if (Model.Count() > 0)
+{
+    <table style="text-align: center">
+        <tbody>
+            <tr>
+                <th>
+                    District
+                </th>
+                <th>
+                    Real Estates#
+                </th>
+                <th>
+                    Avg Price
+                </th>
+                <th>Options</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealEstatesDistrict.DistrictName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealEstatesDistrict.RealEStates.Count)
+                    </td>
+                    <td>
+                        @string.Format("SR {0:f}", item.RealEstatesDistrict.RealEStates.Average(r => r.MinPrice)) - @string.Format("SR {0:f}", item.RealEstatesDistrict.RealEStates.Average(r => r.MaxPrice))
+                    </td>
+                    <td>
+                        <a href="/RealEState/DeleteSubscription/@item.FavoriteID" onclick="return confirm('Are you sure you want to delete this subscription?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="information-box">
+        You didn't subscribe to any district yet. Use <a href="/Home/AdvancedSearch">Advanced Search</a> to find your request.
+    </p>
+}

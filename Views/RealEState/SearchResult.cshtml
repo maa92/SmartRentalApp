@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SmartRentalApp.Models.RealEState>
+@{
+    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+    ViewBag.Title = "Search Result";
+    ViewBag.ShowSlider = false;
+}
+
+@if (Model.Count() > 0)
+{
+    <div class="panes">
+        <ul class="blocks-thumbs thumbs-rollover">
+            @foreach (var estate in Model)
+            {
+                var imageURL = estate.RealEStateImages.Count > 0 ? string.Format("/RealEState/ShowImage/{0}", estate.RealEStateImages.FirstOrDefault().ImageID) : "~/img/dummies/282x150.gif";
+                <li>
+                    <a href="/Home/Details/@estate.RealEStateID" class="thumb" title="@estate.RealEStateType.TypeName">
+                        <img width="282" height="150" src="@imageURL" alt="Post" />
+                    </a>
+                    <div class="excerpt">
+                        <a href="/Home/Details/@estate.RealEStateID" class="header">@estate.RealEStateType.TypeName - for @estate.RealEStatePurpos.PurposeName</a>
+                        @if (estate.Description.Length > 40)
+                        {
+                            <label style="font-size: 9pt;">@estate.Description.ToString().Substring(0, 39) ...</label>
+                        }
+                        else
+                        {
+                            <label style="font-size: 9pt;">
+                                @estate.Description ...
+                            </label>
+                        }
+
+                    </div>
+                    <a href="/Home/Details/@estate.RealEStateID" class="link-button"><span>Read more &#8594;</span></a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <p class="information-box">No result matches you search criteria!. Try <a href="/Home/AdvancedSearch">Advaned Search!</a></p>
+}

@@ -1,0 +1,147 @@
+﻿@model SmartRentalApp.Models.RealEState
+
+@{
+    ViewBag.Title = "Add New Real Estate";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div ng-controller="CreateRealEstate">
+        <fieldset id="contactForm">
+            <div>
+                @Html.LabelFor(model => model.TypeID, "Type") *
+                @Html.DropDownList("TypeID", null, htmlAttributes: new { @ng_model = "selectedType", @ng_init = "selectedType=1" })
+                @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Description) *
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Area) *
+                @Html.EditorFor(model => model.Area)
+                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Address) *
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.PurposeID, "Purpose") *
+                @Html.DropDownList("PurposeID")
+                @Html.ValidationMessageFor(model => model.PurposeID, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.MinPrice) *
+                @Html.EditorFor(model => model.MinPrice)
+                @Html.ValidationMessageFor(model => model.MinPrice, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.MaxPrice) *
+                @Html.EditorFor(model => model.MaxPrice)
+                @Html.ValidationMessageFor(model => model.MaxPrice, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.DistrictID, "District") *
+                @Html.DropDownList("DistrictID")
+                @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+            </div>
+
+            <div ng-show="residential">
+                <label>Rooms# *</label>
+                <input type="number" min="1" max="15" name="roomsNo" id="roomsNo" required />
+            </div>
+
+            <div ng-show="residential">
+                <label>Baths# *</label>
+                <input type="number" min="1" max="6" name="bathsNo" id="bathsNo" required />
+            </div>
+
+            <div ng-show="residential">
+                <label>Options</label>
+                <input type="checkbox" name="withGarden" value="1" style="width: 15px!important" /> With Garden?
+                <br />
+                <input type="checkbox" name="withRoof" value="1" style="width: 15px!important" /> With Roof?
+            </div>
+            <div ng-show="residential">
+                <label>Level#</label>
+                <input type="number" min="1" max="12" name="levelNo" id="levelNo" required />
+            </div>
+
+            <div ng-show="residential">
+                <label>House#</label>
+                <input type="number" min="1" max="20" name="houseNo" id="houseNo" required />
+            </div>
+
+            <div>
+                @Html.Label("Location")
+                <div id="googleMapArea" style="width: 500px; height: 450px">
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Latitude) *
+                @Html.EditorFor(model => model.Latitude, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Longitude) *
+                @Html.EditorFor(model => model.Longitude, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            </div>
+            <p>
+                <input type="submit" value="Add Real Estate" id="submitBig" />
+            </p>
+        </fieldset>
+    </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            var zoomLevel;
+            var myLatlng;
+
+            if (!$('#Latitude').val() && !$('#Longitude').val())
+                myLatlng = new google.maps.LatLng(25, 45);
+            else
+                myLatlng = new google.maps.LatLng($('#Latitude').val(), $('#Longitude').val());
+
+            zoomLevel = 8;
+
+            var myOptions = {
+                scrollwheel: false,
+                zoom: zoomLevel,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("googleMapArea"), myOptions);
+
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                draggable: true
+            });
+
+            google.maps.event.addListener(marker, 'drag', function () {
+                document.getElementById('Latitude').value = marker.position.lat();
+                document.getElementById('Longitude').value = marker.position.lng();
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+}

@@ -1,0 +1,34 @@
+﻿@using SmartRentalApp.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+<div class="one-column">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <fieldset id="contactForm">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                <br />
+                @Html.CheckBoxFor(m => m.RememberMe, htmlAttributes: new { @style = "width: 15px!important" }) <b>Remember Me</b>
+            </div>
+            <p>
+                <input type="submit" value="Log in" id="submit" class="link-button" />
+            </p>
+        </fieldset>
+    }
+    <div>
+        <p>If you don't have an account, <a href="~/Account/Register"><span>Register Here</span></a></p>
+    </div>
+</div>

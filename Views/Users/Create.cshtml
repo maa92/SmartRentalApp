@@ -1,0 +1,44 @@
+﻿@model SmartRentalApp.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Create New User";
+}
+<div class="one-column">
+    @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <fieldset id="contactForm">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.FullName)
+                @Html.TextBoxFor(m => m.FullName)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber)
+            </div>
+            <div>
+                @Html.Label("User Type")
+                <select name="roleName">
+                    @foreach (var role in ViewBag.Roles)
+                    {
+                        <option value="@role.Name">@role.Name</option>
+                    }
+                </select>
+            </div>
+            <p>
+                <input type="submit" value="Add User" id="submit" />
+            </p>
+        </fieldset>
+    }
+</div>

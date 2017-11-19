@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SmartRentalApp.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Users Management";
+}
+
+
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "usersList" }))
+{
+    <fieldset id="contactForm">
+        <div>
+            @*@Html.Label("Role Name")*@
+            <select name="roleName">
+                <option value="">Select Role</option>
+                @foreach (var role in ViewBag.Roles)
+                {
+                    <option value="@role.Name">@role.Name</option>
+                }
+            </select>
+            <input type="submit" value="Search" id="submit" />
+            @Html.ActionLink("Add New User", "Create")
+
+        </div>
+    </fieldset>
+}
+
+<table style="text-align: center">
+    <tbody>
+        <tr>
+            <th>#</th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Mobile
+            </th>
+        </tr>
+        <div id="usersList">
+            @Html.Partial("_Users", Model)
+        </div>
+    </tbody>
+</table>
